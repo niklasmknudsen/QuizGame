@@ -3,11 +3,14 @@ package dk.howard.repository.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Question")
+@NamedQueries({@NamedQuery(name = "QuestionPO.findAll", query = "Select q from QuestionPO q")})
 public class QuestionPO {
 
     public static final String FIND_ALL = "QuestionPO.findAll";
@@ -34,18 +37,17 @@ public class QuestionPO {
     private AnsweredQuestionPO answeredQuestionPO;
 
     @OneToMany(mappedBy = "Question", fetch = FetchType.EAGER)
-    private Set<AnswerPO> answers = new HashSet<AnswerPO>();
+    private List<AnswerPO> answers = new ArrayList<AnswerPO>();
 
     public QuestionPO(){
         this.answeredQuestionPO = null;
     }
 
-    public QuestionPO(String category, String field, String description,int points, AnsweredQuestionPO answeredQuestionPO){
+    public QuestionPO(String category, String field, String description,int points){
         this.category = category;
         this.field = field;
         this.description = description;
         this.points = points;
-        this.answeredQuestionPO = answeredQuestionPO;
     }
 
     public AnswerPO createAnswer(AnswerPO answer){
@@ -55,15 +57,19 @@ public class QuestionPO {
     }
 
     public void addAnswer(AnswerPO answer){
-        this.answers.add(answer);
+        if(!this.answers.contains(answer)){
+            this.answers.add(answer);
+        }
     }
 
     public void removeAnswer(AnswerPO answer){
-        this.answers.remove(answer);
+        if(this.answers.contains(answer)){
+            this.answers.remove(answer);
+        }
     }
 
-    public Set<AnswerPO> getAnswers(){
-        return new HashSet<AnswerPO>(answers);
+    public List<AnswerPO> getAnswers(){
+        return new ArrayList<AnswerPO>(answers);
     }
 
     public AnsweredQuestionPO createAnsweredQuestion(AnsweredQuestionPO answeredQuestionPO){
@@ -79,12 +85,6 @@ public class QuestionPO {
     public void removeAnsweredQuestion(){
         this.answeredQuestionPO = null;
     }
-
-
-
-
-
-
 
     public String getId() {
         return id;
