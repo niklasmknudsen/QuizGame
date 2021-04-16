@@ -28,12 +28,12 @@ public class QuestionRepository implements IRepository<QuestionPO> {
     }
 
     @Override
-    public List<QuestionPO> findAll() {
+    public List<QuestionPO> getAll() {
         return entityManager.createNamedQuery(QuestionPO.FIND_ALL, QuestionPO.class).getResultList();
     }
 
     @Override
-    public void insert(CreateQuestionDTO entity) {
+    public void insert(QuestionPO entity) {
         QuestionPO newQuestion = new QuestionPO(entity.getCategory(), entity.getField(), entity.getDescription(), entity.getPoints());
         entityManager.persist(newQuestion);
     }

@@ -1,4 +1,4 @@
-package dk.howard.resource;
+/*package dk.howard.resource;
 
 import dk.howard.resource.dto.CreateUserDTO;
 import dk.howard.resource.dto.UserDTO;
@@ -33,4 +33,4 @@ public class UserResource {
     public UserDTO findByName(@QueryParam("name") String name) {
         return mapper.map(service.findByName(mapper.mapName(name)));
     }
-}
+}*/
