@@ -13,8 +13,8 @@ public class CreateQuestionDTO {
     @JsonCreator
     public CreateQuestionDTO(@JsonProperty("category") String category,
                              @JsonProperty("field") String field,
-                             @JsonProperty("points") int points,
-                             @JsonProperty("description") String description) {
+                             @JsonProperty("description") String description,
+                             @JsonProperty("points") int points) {
         this.category = category;
         this.field = field;
         this.points = points;
