@@ -15,7 +15,7 @@ public class AnsweredQuestionPO {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private String id;
+    private Id id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Question", referencedColumnName = "ID")
@@ -36,11 +36,11 @@ public class AnsweredQuestionPO {
         this.answerPO = answer;
     }
 
-    public String getId() {
+    public Id getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Id id) {
         this.id = id;
     }
 
