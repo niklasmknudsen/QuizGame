@@ -19,7 +19,7 @@ public class QuestionPO {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private String id;
+    private Id id;
 
     @Column(name = "Category", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
     private String category;
@@ -86,11 +86,11 @@ public class QuestionPO {
         this.answeredQuestionPO = null;
     }
 
-    public String getId() {
+    public Id getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Id id) {
         this.id = id;
     }
 

@@ -3,6 +3,9 @@ package dk.howard.resource;
 import dk.howard.domain.Id;
 import dk.howard.domain.Name;
 import dk.howard.domain.User;
+import dk.howard.repository.entity.QuestionPO;
+import dk.howard.resource.dto.CreateQuestionDTO;
+import dk.howard.resource.dto.ReadQuestionDTO;
 import dk.howard.resource.dto.UserDTO;
 
 import javax.enterprise.context.Dependent;
@@ -14,14 +17,15 @@ public class Mapper {
         return new Id(id);
     }
 
-    Name mapName(String id) {
-        return new Name(id);
+    CreateQuestionDTO mapCreateQuestion(QuestionPO questionPO){
+        return new CreateQuestionDTO(questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
     }
 
-    UserDTO map(User user) {
-        return new UserDTO(user.getId().toString(), user.getName().getName());
+    QuestionPO mapQuestion(CreateQuestionDTO createQuestionDTO){
+        return new QuestionPO(createQuestionDTO.getCategory(), createQuestionDTO.getField(), createQuestionDTO.getDescription(), createQuestionDTO.getPoints());
     }
-    User map(UserDTO userDTO) {
-        return new User(new Id(userDTO.getId()),new Name(userDTO.getName()));
+
+    ReadQuestionDTO mapReadQuestion(QuestionPO questionPO){
+        return new ReadQuestionDTO(questionPO.getId(), questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
     }
 }

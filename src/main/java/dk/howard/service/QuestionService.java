@@ -5,9 +5,13 @@ import dk.howard.repository.Repository;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.resource.dto.CreateQuestionDTO;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional(rollbackOn = Exception.class)
+@Dependent
 public class QuestionService {
 
     private final QuestionRepository repository;
@@ -17,12 +21,12 @@ public class QuestionService {
         this.repository = repository;
     }
 
-    public List<QuestionPO> findAllQuestions(){
-        return repository.findAll();
+    public List<QuestionPO> getAllQuestions(){
+        return repository.getAll();
     }
 
-    public void insert(CreateQuestionDTO createQuestionDTO){
-        repository.insert(createQuestionDTO);
+    public void insert(QuestionPO questionPO){
+        repository.insert(questionPO);
     }
 
     public QuestionPO remove(String id){
