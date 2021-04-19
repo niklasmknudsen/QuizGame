@@ -10,6 +10,6 @@ import java.util.Set;
 public interface IRepository<T> {
     public T remove(String id);
     public List<T> getAll();
-    public void insert(QuestionPO entity);
+    public void insert(T entity);
     public T getById(String id);
 }

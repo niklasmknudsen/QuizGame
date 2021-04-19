@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Answer")
+@NamedQueries({@NamedQuery(name = "AnswerPO.findAll", query = "Select a from AnswerPO a")})
 public class AnswerPO {
 
     public static final String FIND_ALL = "AnswerPO.findAll";

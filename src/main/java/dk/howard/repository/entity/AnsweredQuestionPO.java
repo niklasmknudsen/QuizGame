@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "AnsweredQuestion")
+@NamedQueries({@NamedQuery(name = "AnsweredQuestionPO.findAll", query = "Select a from AnsweredQuestionPO a")})
 public class AnsweredQuestionPO {
 
     public static final String FIND_ALL = "AnsweredQuestionPO.findAll";
@@ -20,7 +21,6 @@ public class AnsweredQuestionPO {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Question", referencedColumnName = "ID")
     private QuestionPO questionPO;
-
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

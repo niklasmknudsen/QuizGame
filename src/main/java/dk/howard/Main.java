@@ -11,6 +11,7 @@ public class Main {
         // Set system properties
         System.setProperty("LOG4J2_DEPLOYMENT_NAME", DEPLOYMENT_NAME);
 
+
         // start the server
         createServer().start();
     }
