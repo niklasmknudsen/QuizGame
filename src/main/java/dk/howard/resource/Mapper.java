@@ -1,8 +1,6 @@
 package dk.howard.resource;
 
 import dk.howard.domain.Id;
-import dk.howard.domain.Name;
-import dk.howard.domain.User;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 import dk.howard.repository.entity.QuestionPO;
@@ -17,15 +15,15 @@ public class Mapper {
         return new Id(id);
     }
 
-    CreateQuestionDTO mapCreateQuestion(QuestionPO questionPO){
+    CreateQuestionDTO mapCreateQuestion(QuestionPO questionPO) {
         return new CreateQuestionDTO(questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
     }
 
-    QuestionPO mapQuestion(CreateQuestionDTO createQuestionDTO){
+    QuestionPO mapQuestion(CreateQuestionDTO createQuestionDTO) {
         return new QuestionPO(createQuestionDTO.getCategory(), createQuestionDTO.getField(), createQuestionDTO.getDescription(), createQuestionDTO.getPoints());
     }
 
-    ReadQuestionDTO mapReadQuestion(QuestionPO questionPO){
+    ReadQuestionDTO mapReadQuestion(QuestionPO questionPO) {
         return new ReadQuestionDTO(questionPO.getId(), questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
     }
 

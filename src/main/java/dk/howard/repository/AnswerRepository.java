@@ -5,13 +5,17 @@ import dk.howard.repository.entity.QuestionPO;
 import dk.howard.repository.entitymanager.DemoEntityManager;
 import dk.howard.repository.interfaces.IRepository;
 
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+@Dependent
 public class AnswerRepository implements IRepository<AnswerPO> {
 
     private final EntityManager entityManager;
 
+    @Inject
     public AnswerRepository(DemoEntityManager  entityManager) {
         this.entityManager = entityManager.getEntityManager();
     }

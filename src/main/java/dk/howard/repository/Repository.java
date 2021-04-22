@@ -10,7 +10,6 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import java.util.List;
 
 @Dependent
 public class Repository {

@@ -3,12 +3,16 @@ package dk.howard.service;
 import dk.howard.repository.AnsweredQuestionRepository;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 
+import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import java.util.List;
 
+@Dependent
 public class AnsweredQuestionService {
 
     private AnsweredQuestionRepository repository;
 
+    @Inject
     public AnsweredQuestionService(AnsweredQuestionRepository repository) {
         this.repository = repository;
     }

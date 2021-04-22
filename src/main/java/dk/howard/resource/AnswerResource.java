@@ -8,6 +8,7 @@ import dk.howard.resource.dto.ReadAnswerDTO;
 import dk.howard.resource.dto.ReadQuestionDTO;
 import dk.howard.service.AnswerService;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.ws.rs.*;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 // localhost:port/answer/
 @Path("/answer")
+@RequestScoped
 public class AnswerResource {
 
     private final AnswerService service;
