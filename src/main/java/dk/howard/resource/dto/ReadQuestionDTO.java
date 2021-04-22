@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ReadQuestionDTO {
 
-    private Id id;
+    private int id;
 
     private String category;
 
@@ -28,7 +28,7 @@ public class ReadQuestionDTO {
         this.answeredQuestionPO = null;
     }
 
-    public ReadQuestionDTO(Id id, String category, String field, String description, int points){
+    public ReadQuestionDTO(int id, String category, String field, String description, int points){
         this.id = id;
         this.category = category;
         this.field = field;

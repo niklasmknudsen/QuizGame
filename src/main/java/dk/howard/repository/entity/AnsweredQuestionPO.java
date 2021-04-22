@@ -13,13 +13,12 @@ public class AnsweredQuestionPO {
     public static final String FIND_ALL = "AnsweredQuestionPO.findAll";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "int" , nullable = false, updatable = false, unique = true)
+    private int id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Question", referencedColumnName = "ID")
+    @JoinColumn(name = "Question", referencedColumnName = "id")
     private QuestionPO questionPO;
 
     @OneToOne(fetch = FetchType.LAZY)
@@ -36,11 +35,11 @@ public class AnsweredQuestionPO {
         this.answerPO = answer;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 

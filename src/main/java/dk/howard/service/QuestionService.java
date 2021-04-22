@@ -1,7 +1,6 @@
 package dk.howard.service;
 
 import dk.howard.repository.QuestionRepository;
-import dk.howard.repository.Repository;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.resource.dto.CreateQuestionDTO;
 

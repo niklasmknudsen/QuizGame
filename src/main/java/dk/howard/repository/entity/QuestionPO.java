@@ -10,16 +10,15 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Question")
-@NamedQueries({@NamedQuery(name = "QuestionPO.findAll", query = "Select q from QuestionPO q")})
+@NamedQueries({@NamedQuery(name = "QuestionPO.findAll", query = "Select u from QuestionPO u")})
 public class QuestionPO {
 
     public static final String FIND_ALL = "QuestionPO.findAll";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "int" , nullable = false, updatable = false, unique = true)
+    private int id;
 
     @Column(name = "Category", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
     private String category;
@@ -36,7 +35,7 @@ public class QuestionPO {
     @OneToOne(mappedBy = "questionPO")
     private AnsweredQuestionPO answeredQuestionPO;
 
-    @OneToMany(mappedBy = "Question", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<AnswerPO> answers = new ArrayList<AnswerPO>();
 
     public QuestionPO(){
@@ -86,13 +85,15 @@ public class QuestionPO {
         this.answeredQuestionPO = null;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
+
+
 
     public String getCategory() {
         return category;

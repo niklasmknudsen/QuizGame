@@ -7,22 +7,21 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Answer")
-@NamedQueries({@NamedQuery(name = "AnswerPO.findAll", query = "Select a from AnswerPO a")})
+@NamedQueries({@NamedQuery(name = "AnswerPO.findAll", query = "Select q from AnswerPO q")})
 public class AnswerPO {
 
     public static final String FIND_ALL = "AnswerPO.findAll";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", columnDefinition = "int" , nullable = false, updatable = false, unique = true)
+    private int id;
 
     @Column(name = "Answer_Name", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
     private String answerName;
 
     @ManyToOne
-    @JoinColumn(name = "QuestionID", referencedColumnName = "ID")
+    @JoinColumn(name = "questions", referencedColumnName = "id")
     private QuestionPO question;
 
     @Column(name = "True_Answer", nullable = false, updatable = true)
@@ -54,11 +53,11 @@ public class AnswerPO {
         return this.question;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -97,7 +96,7 @@ public class AnswerPO {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("ID: " + this.id);
+        sb.append("id: " + this.id);
         sb.append(", AnswerName: " + this.answerName);
         sb.append(", Question: " + this.question);
         sb.append(", TrueAnswer: " + this.trueAnswer);

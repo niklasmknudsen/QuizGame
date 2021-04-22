@@ -8,7 +8,7 @@ import javax.persistence.*;
 
 public class ReadAnswerDTO {
 
-    private Id id;
+    private int id;
 
     private final String answerName;
 
@@ -22,7 +22,7 @@ public class ReadAnswerDTO {
 
     @JsonCreator
     public ReadAnswerDTO(
-                         @JsonProperty("Id") Id id,
+                         @JsonProperty("Id") int id,
                          @JsonProperty("answerName") String answerName,
                          @JsonProperty("question") QuestionPO question,
                          @JsonProperty("trueAnswer") boolean trueAnswer,
@@ -35,11 +35,11 @@ public class ReadAnswerDTO {
         this.url = url;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 

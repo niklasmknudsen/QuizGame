@@ -5,8 +5,10 @@ import dk.howard.repository.entity.AnsweredQuestionPO;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional(rollbackOn = Exception.class)
 @Dependent
 public class AnsweredQuestionService {
 

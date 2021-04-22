@@ -1,29 +1,14 @@
-drop table if exists answers
-drop table if exists questions
+insert into dbo.question values
+('SCIENCE','Wich physical property can be measured in the unit Coulomb','Physics',12)
 
-create table questions(
-id int identity primary key,
-category varchar(40) not null,
-field varchar(40) not null,
-points int not null,
-question text not null,
-)
+insert into dbo.answer values
+('Pressure', 'The SI unit for Pressure is Pascal', 0, 'https://en.wikipedia.org/wiki/Pressure', 1),
+('Temperature', 'The SI unit for Temperature is Kelvin', 0, 'https://en.wikipedia.org/wiki/Temperature', 1),
+('Volume', 'The SI unit for Volume is Cubic Meter', 0, 'https://en.wikipedia.org/wiki/Volume', 1),
+('Force', 'The SI unit for Force is Newton', 0, 'https://en.wikipedia.org/wiki/Force', 1),
+('Charge', 'The SI unit for Electric Charge is Coulomb', 1, 'https://en.wikipedia.org/wiki/Pascal_(unit)', 1)
 
-create table answers(
-id int identity primary key,
-AnswerName varchar(40),
-questions int foreign key references questions(id),
-trueAnswer bit,
-forklaring text,
-link varchar(150)
-)
 
-insert into questions values
-('SCIENCE','Physics',12,'Wich physical property can be measured in the unit Coulomb')
-
-insert into answers values
-('Pressure', 1, 0, 'Not Correct', 'Link to correct answer: www.link.dk'),
-('Temperature', 1, 0, 'Not Correct', 'Link to correct answer: www.link.dk'),
-('Volume', 1, 0, 'Not Correct', 'Link to correct answer: www.link.dk'),
-('Force', 1, 0, 'Not Correct', 'Link to correct answer: www.link.dk'),
-('Charge', 1, 1, 'he SI unit for electric charge is Coulomb', 'https://en.wikipedia.org/wiki/Pascal_(unit)')
+select * from dbo.Answer
+select * from dbo.AnsweredQuestion
+select * from dbo.Question

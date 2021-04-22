@@ -1,14 +1,10 @@
 package dk.howard.service;
 
-import dk.howard.domain.Id;
-import dk.howard.domain.Name;
-import dk.howard.domain.User;
-import dk.howard.repository.Repository;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-
+/*
 @Transactional(rollbackOn = Exception.class)
 @Dependent
 public class Service {
@@ -29,3 +25,4 @@ public class Service {
     }
 
 }
+*/

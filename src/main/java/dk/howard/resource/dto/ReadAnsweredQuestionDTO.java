@@ -2,13 +2,12 @@ package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dk.howard.domain.Id;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.QuestionPO;
 
 public class ReadAnsweredQuestionDTO {
 
-    private Id id;
+    private int id;
 
     private final QuestionPO questionPO;
 
@@ -20,7 +19,7 @@ public class ReadAnsweredQuestionDTO {
         this.answerPO = answer;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 

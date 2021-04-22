@@ -5,12 +5,14 @@ import dk.howard.resource.dto.CreateQuestionDTO;
 import dk.howard.resource.dto.ReadQuestionDTO;
 import dk.howard.service.QuestionService;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/question")
+@RequestScoped
 public class QuestionResource {
     private final QuestionService questionService;
     private final Mapper mapper;

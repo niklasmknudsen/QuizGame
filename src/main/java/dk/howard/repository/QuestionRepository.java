@@ -3,6 +3,7 @@ package dk.howard.repository;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.repository.entitymanager.DemoEntityManager;
 import dk.howard.repository.interfaces.IRepository;
+import dk.howard.resource.Mapper;
 import dk.howard.resource.dto.CreateQuestionDTO;
 
 import javax.enterprise.context.Dependent;

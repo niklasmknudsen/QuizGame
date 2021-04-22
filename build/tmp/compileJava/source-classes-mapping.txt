@@ -1,41 +1,31 @@
 dk/howard/DemoApplication.java
  dk.howard.DemoApplication
-dk/howard/domain/User.java
- dk.howard.domain.User
 dk/howard/repository/AnswerRepository.java
  dk.howard.repository.AnswerRepository
-dk/howard/repository/entity/UserTestPO.java
- dk.howard.repository.entity.UserTestPO
 dk/howard/repository/interfaces/IRepository.java
  dk.howard.repository.interfaces.IRepository
 dk/howard/repository/entitymanager/EntityManagerProducer.java
  dk.howard.repository.entitymanager.EntityManagerProducer
 dk/howard/repository/entitymanager/JpaStarter.java
  dk.howard.repository.entitymanager.JpaStarter
-dk/howard/repository/entity/UserPO.java
- dk.howard.repository.entity.UserPO
 dk/howard/resource/AnswerResource.java
  dk.howard.resource.AnswerResource
 dk/howard/resource/dto/ReadQuestionDTO.java
  dk.howard.resource.dto.ReadQuestionDTO
+dk/howard/service/AnsweredQuestionService.java
+ dk.howard.service.AnsweredQuestionService
 dk/howard/resource/Mapper.java
  dk.howard.resource.Mapper
-dk/howard/repository/QuestionRepository.java
- dk.howard.repository.QuestionRepository
-dk/howard/domain/Id.java
- dk.howard.domain.Id
-dk/howard/resource/dto/CreateAnsweredQuestionDTO.java
- dk.howard.resource.dto.CreateAnsweredQuestionDTO
-dk/howard/resource/dto/UserDTO.java
- dk.howard.resource.dto.UserDTO
+dk/howard/resource/AnsweredQuestionResource.java
+ dk.howard.resource.AnsweredQuestionResource
 dk/howard/repository/entity/AnswerPO.java
  dk.howard.repository.entity.AnswerPO
 dk/howard/resource/dto/ReadAnsweredQuestionDTO.java
  dk.howard.resource.dto.ReadAnsweredQuestionDTO
 dk/howard/Main.java
  dk.howard.Main
-dk/howard/repository/Repository.java
- dk.howard.repository.Repository
+dk/howard/repository/AnsweredQuestionRepository.java
+ dk.howard.repository.AnsweredQuestionRepository
 dk/howard/resource/dto/ReadAnswerDTO.java
  dk.howard.resource.dto.ReadAnswerDTO
 dk/howard/repository/entity/AnsweredQuestionPO.java
@@ -44,25 +34,19 @@ dk/howard/resource/dto/CreateQuestionDTO.java
  dk.howard.resource.dto.CreateQuestionDTO
 dk/howard/resource/dto/CreateAnswerDTO.java
  dk.howard.resource.dto.CreateAnswerDTO
-dk/howard/resource/QuestionResource.java
- dk.howard.resource.QuestionResource
+dk/howard/resource/dto/CreateAnsweredQuestionDTO.java
+ dk.howard.resource.dto.CreateAnsweredQuestionDTO
 dk/howard/resource/dto/CreateUserDTO.java
  dk.howard.resource.dto.CreateUserDTO
 dk/howard/repository/entitymanager/DemoEntityManager.java
  dk.howard.repository.entitymanager.DemoEntityManager
 dk/howard/service/AnswerService.java
  dk.howard.service.AnswerService
-dk/howard/service/QuestionService.java
- dk.howard.service.QuestionService
 dk/howard/repository/entity/QuestionPO.java
  dk.howard.repository.entity.QuestionPO
-dk/howard/domain/Name.java
- dk.howard.domain.Name
-dk/howard/service/Service.java
- dk.howard.service.Service
-dk/howard/repository/AnsweredQuestionRepository.java
- dk.howard.repository.AnsweredQuestionRepository
-dk/howard/service/AnsweredQuestionService.java
- dk.howard.service.AnsweredQuestionService
-dk/howard/resource/AnsweredQuestionResource.java
- dk.howard.resource.AnsweredQuestionResource
+dk/howard/repository/QuestionRepository.java
+ dk.howard.repository.QuestionRepository
+dk/howard/resource/QuestionResource.java
+ dk.howard.resource.QuestionResource
+dk/howard/service/QuestionService.java
+ dk.howard.service.QuestionService
