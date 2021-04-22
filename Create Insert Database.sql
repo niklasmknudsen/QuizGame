@@ -1,5 +1,6 @@
 insert into dbo.question values
-('SCIENCE','Wich physical property can be measured in the unit Coulomb','Physics',12)
+('SCIENCE','Wich physical property can be measured in the unit Coulomb','Physics',12),
+('test','Wich physical property can be measured in the unit Coulomb','Physics',14)
 
 insert into dbo.answer values
 ('Pressure', 'The SI unit for Pressure is Pascal', 0, 'https://en.wikipedia.org/wiki/Pressure', 1),
@@ -10,5 +11,10 @@ insert into dbo.answer values
 
 
 select * from dbo.Answer
+--delete from dbo.Answer where id = 1
+--select * from dbo.Answer
+
+
+
 select * from dbo.AnsweredQuestion
 select * from dbo.Question

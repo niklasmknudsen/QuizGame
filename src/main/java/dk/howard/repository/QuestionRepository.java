@@ -1,5 +1,6 @@
 package dk.howard.repository;
 
+import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.repository.entitymanager.DemoEntityManager;
 import dk.howard.repository.interfaces.IRepository;
@@ -23,10 +24,9 @@ public class QuestionRepository implements IRepository<QuestionPO> {
     }
 
     @Override
-    public QuestionPO remove(String id) {
+    public void remove(int id) {
         QuestionPO questionToRemove = entityManager.find(QuestionPO.class, id);
         entityManager.remove(questionToRemove);
-        return questionToRemove;
     }
 
     @Override
@@ -41,8 +41,8 @@ public class QuestionRepository implements IRepository<QuestionPO> {
     }
 
     @Override
-    public QuestionPO getById(String id) {
-        QuestionPO selectedQuestion = entityManager.find(QuestionPO.class, id);
-        return selectedQuestion;
+    public QuestionPO getById(int id) {
+        QuestionPO po = entityManager.find(QuestionPO.class, id);
+        return new QuestionPO(po.getCategory(), po.getField(), po.getDescription(), po.getPoints());
     }
 }

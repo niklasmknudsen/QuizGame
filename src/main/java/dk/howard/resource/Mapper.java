@@ -26,11 +26,11 @@ public class Mapper {
     }
 
     AnswerPO mapCreateAnswer(CreateAnswerDTO createAnswerDTO) {
-        return new AnswerPO(createAnswerDTO.getAnswerName(), createAnswerDTO.getQuestion(), createAnswerDTO.isTrueAnswer(), createAnswerDTO.getExplanation(), createAnswerDTO.getUrl());
+        return new AnswerPO(createAnswerDTO.getAnswerName(), createAnswerDTO.isTrueAnswer(), createAnswerDTO.getExplanation(), createAnswerDTO.getUrl(), createAnswerDTO.getQuestion());
     }
 
     ReadAnswerDTO mapReadAnswer(AnswerPO answerPO) {
-        return new ReadAnswerDTO(answerPO.getId(), answerPO.getAnswerName(), answerPO.getQuestion(), answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl());
+        return new ReadAnswerDTO(answerPO.getId(), answerPO.getAnswerName(), answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl(), answerPO.getQuestion());
     }
 
     AnsweredQuestionPO mapCreateAnsweredQuestion(CreateAnsweredQuestionDTO createAnsweredQuestionDTO) {
@@ -47,8 +47,8 @@ public class Mapper {
     }
 
     AnswerPO mapAnswer(AnswerPO answerPO) {
-        return new AnswerPO(answerPO.getAnswerName(), answerPO.getQuestion(),
-                answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl());
+        return new AnswerPO(answerPO.getAnswerName(),
+                answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl(), answerPO.getQuestion());
     }
     // Question
     List <QuestionPO> mapQuestion(List<QuestionPO> questionPO) {

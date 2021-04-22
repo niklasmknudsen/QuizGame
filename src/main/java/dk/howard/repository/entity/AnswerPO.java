@@ -1,43 +1,62 @@
 package dk.howard.repository.entity;
 
 
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.*;
 
 import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAnyElement;
+import javax.xml.bind.annotation.XmlElement;
 
 @Entity
 @Table(name = "Answer")
-@NamedQueries({@NamedQuery(name = "AnswerPO.findAll", query = "Select q from AnswerPO q")})
+@NamedQueries({
+                @NamedQuery(name = "AnswerPO.findAll", query = "Select q from AnswerPO q"),
+                @NamedQuery(name = "AnswerPO.findByQID", query = "select q from AnswerPO q where q.question=:QID")
+})
 public class AnswerPO {
 
     public static final String FIND_ALL = "AnswerPO.findAll";
+    public static final String QID_PARAMETER = "QID";
+    public static final String FIND_BY_QID = "AnswerPO.findByQID";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int" , nullable = false, updatable = false, unique = true)
+    @XmlElement(name = "id", required = false)
     private int id;
 
     @Column(name = "Answer_Name", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
+    @XmlElement(name = "answerName", required = true)
     private String answerName;
 
-    @ManyToOne
-    @JoinColumn(name = "questions", referencedColumnName = "id")
-    private QuestionPO question;
-
     @Column(name = "True_Answer", nullable = false, updatable = true)
+    @XmlElement(name = "trueAnswer", required = true)
     private boolean trueAnswer;
 
     @Column(name = "Explanation", nullable = false, updatable = true)
+    @XmlElement(name = "explanation", required = true)
     private String explanation;
 
     @Column(name = "URL", nullable = false, updatable = true)
+    @XmlElement(name = "url", required = true)
     private String url;
+
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
+    @JoinColumn(name = "questions", referencedColumnName = "id")
+    @OnDelete(action = OnDeleteAction.NO_ACTION)
+    @XmlElement(name = "question", required = true)
+    private QuestionPO question;
 
     public AnswerPO(){
         this.question = null;
     }
 
-    public AnswerPO(String answerName, QuestionPO question, boolean trueAnswer, String explanation, String url){
+    public AnswerPO(String answerName, boolean trueAnswer, String explanation, String url, QuestionPO question){
         this.answerName = answerName;
         this.question = question;
         this.trueAnswer = trueAnswer;

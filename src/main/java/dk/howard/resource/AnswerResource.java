@@ -50,12 +50,11 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @DELETE
-    public AnswerPO removeAnswer(@PathParam("id") String id){
-        if (id != null) {
-            AnswerPO removedAnswer = service.remove(id);
-            return removedAnswer;
-        } else {
-            return null;
+    public void removeAnswer(@PathParam("id") int id){
+        try {
+            service.remove(id);
+        } catch (NoResultException e) {
+            throw new NoResultException(e.getMessage());
         }
     }
 
@@ -63,10 +62,22 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @GET
-    public ReadAnswerDTO getById(@PathParam("id") String id){
-        if (id != null) {
+    public ReadAnswerDTO getById(@PathParam("id") int id){
+        if (id != 0) {
             ReadAnswerDTO selectedAnswer = mapper.mapReadAnswer(service.getById(id));
             return selectedAnswer;
+        }
+        return null;
+    }
+
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/question/{id}")
+    @GET
+    public List<AnswerPO> getByQId(@PathParam("qid") int id) {
+        if (id != 0) {
+            List<AnswerPO> selectedAnswers = mapper.mapAnswer(service.getByQId(id));
+            return selectedAnswers;
         }
         return null;
     }

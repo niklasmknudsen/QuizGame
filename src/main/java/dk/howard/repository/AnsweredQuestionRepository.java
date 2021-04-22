@@ -21,26 +21,25 @@ public class AnsweredQuestionRepository implements IRepository<AnsweredQuestionP
         this.entityManager = entityManager.getEntityManager();
     }
 
- //   @Override
-    public AnsweredQuestionPO remove(String id) {
+    @Override
+    public void remove(int id) {
         AnsweredQuestionPO answeredQuestionToRemove = this.entityManager.find(AnsweredQuestionPO.class, id);
         this.entityManager.remove(answeredQuestionToRemove);
-        return answeredQuestionToRemove;
     }
 
-  //  @Override
+    @Override
     public List<AnsweredQuestionPO> getAll() {
         return entityManager.createNamedQuery(AnsweredQuestionPO.FIND_ALL, AnsweredQuestionPO.class).getResultList();
     }
 
-   // @Override
+    @Override
     public void insert(AnsweredQuestionPO entity) {
         AnsweredQuestionPO newAnsweredQuestion = new AnsweredQuestionPO(entity.getQuestionPO(), entity.getAnswerPO());
         this.entityManager.persist(newAnsweredQuestion);
     }
 
-   // @Override
-    public AnsweredQuestionPO getById(String id) {
+    @Override
+    public AnsweredQuestionPO getById(int id) {
         return entityManager.find(AnsweredQuestionPO.class, id);
     }
 }

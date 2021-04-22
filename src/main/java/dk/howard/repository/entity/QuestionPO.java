@@ -35,8 +35,8 @@ public class QuestionPO {
     @OneToOne(mappedBy = "questionPO")
     private AnsweredQuestionPO answeredQuestionPO;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<AnswerPO> answers = new ArrayList<AnswerPO>();
+    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AnswerPO> answers;
 
     public QuestionPO(){
         this.answeredQuestionPO = null;
@@ -49,8 +49,17 @@ public class QuestionPO {
         this.points = points;
     }
 
+    public QuestionPO(String category, String field, String description,int points, List<AnswerPO> answers){
+        this.category = category;
+        this.field = field;
+        this.description = description;
+        this.points = points;
+        this.answers = answers;
+    }
+
+
     public AnswerPO createAnswer(AnswerPO answer){
-        AnswerPO newAnswer = new AnswerPO(answer.getAnswerName(), answer.getQuestion(), answer.isTrueAnswer(), answer.getExplanation(), answer.getUrl());
+        AnswerPO newAnswer = new AnswerPO(answer.getAnswerName(), answer.isTrueAnswer(), answer.getExplanation(), answer.getUrl(), answer.getQuestion());
         this.answers.add(newAnswer);
         return newAnswer;
     }

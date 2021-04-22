@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Set;
 
 public interface IRepository<T> {
-    public T remove(String id);
+    public void remove(int id);
     public List<T> getAll();
     public void insert(T entity);
-    public T getById(String id);
+    public T getById(int id);
 }

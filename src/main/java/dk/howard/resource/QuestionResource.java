@@ -7,6 +7,7 @@ import dk.howard.service.QuestionService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.persistence.NoResultException;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -39,18 +40,21 @@ public class QuestionResource {
 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/id")
+    @Path("/{id}")
     @DELETE
-    public QuestionPO removeQuestion(@PathParam("id") String id){
-        QuestionPO removedQuestion = questionService.remove(id);
-        return removedQuestion;
+    public void removeQuestion(@PathParam("id") int id){
+        try {
+            questionService.remove(id);
+        } catch (NoResultException e) {
+            throw new NoResultException(e.getMessage());
+        }
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path("/id")
+    @Path("/{id}")
     @GET
-    public ReadQuestionDTO getById(@PathParam("id") String id){
+    public ReadQuestionDTO getById(@PathParam("id") int id){
         ReadQuestionDTO selectedQuestion = mapper.mapReadQuestion(questionService.getById(id));
         return selectedQuestion;
     }

@@ -1,5 +1,6 @@
 package dk.howard.resource.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,6 +23,7 @@ public class ReadQuestionDTO {
 
     private AnsweredQuestionPO answeredQuestionPO;
 
+    @JsonBackReference
     private List<AnswerPO> answers = new ArrayList<AnswerPO>();
 
     public ReadQuestionDTO(){
@@ -50,5 +52,18 @@ public class ReadQuestionDTO {
 
     public void setAnsweredQuestionPO(AnsweredQuestionPO answeredQuestionPO){
         this.answeredQuestionPO = answeredQuestionPO;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadQuestionDTO{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", field='" + field + '\'' +
+                ", description='" + description + '\'' +
+                ", points=" + points +
+                ", answeredQuestionPO=" + answeredQuestionPO +
+                ", answers=" + answers +
+                '}';
     }
 }
