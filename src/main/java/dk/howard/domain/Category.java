@@ -1,6 +1,8 @@
 package dk.howard.domain;
 
-public enum Category {
+import java.io.Serializable;
+
+public enum Category implements Serializable {
 
     SCIENCE, POLITICS, SPORT
 }

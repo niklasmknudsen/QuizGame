@@ -1,6 +1,8 @@
 package dk.howard.domain;
 
-public class Explanation {
+import java.io.Serializable;
+
+public class Explanation implements Serializable {
 
     private final String explanation;
 

@@ -2,10 +2,11 @@ package dk.howard.domain;
 
 import dk.howard.repository.entity.AnswerPO;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListAnswer {
+public class ListAnswer implements Serializable {
 
     private final List<Answer> answers = new ArrayList<>();
 

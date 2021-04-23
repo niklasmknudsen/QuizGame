@@ -33,8 +33,7 @@ public class QuestionRepository implements IRepository<Question> {
 
     @Override
     public List<Question> getAll() {
-        return null;
-        //return entityManager.createNamedQuery(QuestionPO.FIND_ALL, QuestionPO.class).getResultList();
+        return mapper.mapQuestions(entityManager.createNamedQuery(QuestionPO.FIND_ALL, QuestionPO.class).getResultList());
     }
 
     @Override

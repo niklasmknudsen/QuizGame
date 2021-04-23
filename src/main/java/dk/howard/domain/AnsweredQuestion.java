@@ -2,7 +2,9 @@ package dk.howard.domain;
 
 import dk.howard.repository.entity.QuestionPO;
 
-public class AnsweredQuestion {
+import java.io.Serializable;
+
+public class AnsweredQuestion implements Serializable{
 
     private final Id id;
 

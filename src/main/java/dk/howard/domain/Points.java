@@ -1,6 +1,8 @@
 package dk.howard.domain;
 
-public class Points {
+import java.io.Serializable;
+
+public class Points implements Serializable {
 
     private final int points;
 

@@ -1,6 +1,8 @@
 package dk.howard.domain;
 
-public class TrueAnswer {
+import java.io.Serializable;
+
+public class TrueAnswer implements Serializable {
 
     private final boolean trueAnswer;
 

@@ -1,8 +1,9 @@
 package dk.howard.domain;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class Id {
+public class Id implements Serializable {
 
     private final UUID id;
 
