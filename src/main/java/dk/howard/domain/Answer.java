@@ -2,6 +2,7 @@ package dk.howard.domain;
 
 public class Answer {
 
+
     private final Id id;
 
     private final AnswerName answerName;

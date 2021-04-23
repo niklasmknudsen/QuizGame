@@ -11,6 +11,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.UUID;
 
 @Entity
 @Table(name = "Answer")
@@ -25,10 +26,10 @@ public class AnswerPO {
     public static final String FIND_BY_QID = "AnswerPO.findByQID";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue
+    @Type(type = "uuid-char")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    private UUID id;
 
     @Column(name = "Answer_Name", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
     @XmlElement(name = "answerName", required = true)
@@ -70,11 +71,11 @@ public class AnswerPO {
         return this.question;
     }
 
-    public Id getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

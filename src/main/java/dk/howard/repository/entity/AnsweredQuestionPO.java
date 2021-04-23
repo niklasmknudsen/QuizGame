@@ -2,8 +2,10 @@ package dk.howard.repository.entity;
 
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 @Table(name = "AnsweredQuestion")
@@ -13,10 +15,10 @@ public class AnsweredQuestionPO {
     public static final String FIND_ALL = "AnsweredQuestionPO.findAll";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue
+    @Type(type = "uuid-char")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    private UUID id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "Question", referencedColumnName = "id")
@@ -36,11 +38,11 @@ public class AnsweredQuestionPO {
         this.answerPO = answer;
     }
 
-    public Id getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

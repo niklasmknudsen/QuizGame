@@ -2,6 +2,7 @@ package dk.howard.repository.entity;
 
 import dk.howard.domain.Category;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.*;
@@ -14,8 +15,8 @@ public class QuestionPO {
     public static final String FIND_ALL = "QuestionPO.findAll";
 
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @GeneratedValue
+    @Type(type = "uuid-char")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
     private UUID id;
 
