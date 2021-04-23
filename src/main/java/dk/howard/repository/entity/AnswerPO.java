@@ -46,10 +46,8 @@ public class AnswerPO {
     @XmlElement(name = "url", required = true)
     private String url;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, fetch = FetchType.LAZY)
-    @JoinColumn(name = "questions", referencedColumnName = "id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
-    @XmlElement(name = "question", required = true)
+    @ManyToOne()
+    @JoinColumn(name = "questions", nullable = false)
     private QuestionPO question;
 
     public AnswerPO(){

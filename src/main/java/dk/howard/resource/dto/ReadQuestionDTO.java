@@ -30,12 +30,13 @@ public class ReadQuestionDTO {
         this.answeredQuestionPO = null;
     }
 
-    public ReadQuestionDTO(int id, String category, String field, String description, int points){
+    public ReadQuestionDTO(int id, String category, String field, String description, int points, List<AnswerPO> answers){
         this.id = id;
         this.category = category;
         this.field = field;
         this.description = description;
         this.points = points;
+        this.answers = answers;
     }
 
     public List<AnswerPO> getAnswers(){
@@ -52,6 +53,30 @@ public class ReadQuestionDTO {
 
     public void setAnsweredQuestionPO(AnsweredQuestionPO answeredQuestionPO){
         this.answeredQuestionPO = answeredQuestionPO;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public AnsweredQuestionPO getAnsweredQuestionPO() {
+        return answeredQuestionPO;
     }
 
     @Override

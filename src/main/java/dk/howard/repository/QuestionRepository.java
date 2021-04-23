@@ -40,9 +40,8 @@ public class QuestionRepository implements IRepository<QuestionPO> {
         entityManager.persist(newQuestion);
     }
 
-    @Override
-    public QuestionPO getById(int id) {
-        QuestionPO po = entityManager.find(QuestionPO.class, id);
-        return new QuestionPO(po.getCategory(), po.getField(), po.getDescription(), po.getPoints());
-    }
+ /*   @Override
+    public Question getById(int id) {
+        return entityManager.find(QuestionPO.class, id);
+    }*/
 }

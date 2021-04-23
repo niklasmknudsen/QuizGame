@@ -35,7 +35,7 @@ public class QuestionPO {
     @OneToOne(mappedBy = "questionPO")
     private AnsweredQuestionPO answeredQuestionPO;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<AnswerPO> answers;
 
     public QuestionPO(){

@@ -22,7 +22,7 @@ public class Mapper {
     }
 
     ReadQuestionDTO mapReadQuestion(QuestionPO questionPO) {
-        return new ReadQuestionDTO(questionPO.getId(), questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
+        return new ReadQuestionDTO(questionPO.getId(), questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints(), questionPO.getAnswers());
     }
 
     AnswerPO mapCreateAnswer(CreateAnswerDTO createAnswerDTO) {
