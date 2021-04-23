@@ -1,5 +1,6 @@
 package dk.howard.resource.dto;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 import org.hibernate.annotations.GenericGenerator;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ReadQuestionDTO {
 
-    private Id id;
+    private int id;
 
     private String category;
 
@@ -22,18 +23,20 @@ public class ReadQuestionDTO {
 
     private AnsweredQuestionPO answeredQuestionPO;
 
+    @JsonBackReference
     private List<AnswerPO> answers = new ArrayList<AnswerPO>();
 
     public ReadQuestionDTO(){
         this.answeredQuestionPO = null;
     }
 
-    public ReadQuestionDTO(Id id, String category, String field, String description, int points){
+    public ReadQuestionDTO(int id, String category, String field, String description, int points, List<AnswerPO> answers){
         this.id = id;
         this.category = category;
         this.field = field;
         this.description = description;
         this.points = points;
+        this.answers = answers;
     }
 
     public List<AnswerPO> getAnswers(){
@@ -50,5 +53,42 @@ public class ReadQuestionDTO {
 
     public void setAnsweredQuestionPO(AnsweredQuestionPO answeredQuestionPO){
         this.answeredQuestionPO = answeredQuestionPO;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public String getField() {
+        return field;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public AnsweredQuestionPO getAnsweredQuestionPO() {
+        return answeredQuestionPO;
+    }
+
+    @Override
+    public String toString() {
+        return "ReadQuestionDTO{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", field='" + field + '\'' +
+                ", description='" + description + '\'' +
+                ", points=" + points +
+                ", answeredQuestionPO=" + answeredQuestionPO +
+                ", answers=" + answers +
+                '}';
     }
 }

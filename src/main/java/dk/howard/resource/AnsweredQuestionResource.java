@@ -8,6 +8,7 @@ import dk.howard.resource.dto.ReadAnswerDTO;
 import dk.howard.resource.dto.ReadAnsweredQuestionDTO;
 import dk.howard.service.AnsweredQuestionService;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 import javax.ws.rs.*;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import java.util.List;
 
 @Path("/answeredquestion")
+@RequestScoped
 public class AnsweredQuestionResource {
 
     private final AnsweredQuestionService service;
@@ -48,12 +50,11 @@ public class AnsweredQuestionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @DELETE
-    public AnsweredQuestionPO removeAnswer(@PathParam("id") String id){
-        if (id != null) {
-            AnsweredQuestionPO removeAnsweredQuestionPO = service.remove(id);
-            return removeAnsweredQuestionPO;
-        } else {
-            return null;
+    public void removeAnswer(@PathParam("id") int id){
+        try {
+            service.remove(id);
+        } catch (NoResultException e) {
+            throw new NoResultException(e.getMessage());
         }
     }
 
@@ -61,8 +62,8 @@ public class AnsweredQuestionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @GET
-    public ReadAnsweredQuestionDTO getById(@PathParam("id") String id){
-        if (id != null) {
+    public ReadAnsweredQuestionDTO getById(@PathParam("id") int id){
+        if (id != 0) {
             ReadAnsweredQuestionDTO selectedAnswer = mapper.mapReadAnsweredQuestion(service.getById(id));
             return selectedAnswer;
         }

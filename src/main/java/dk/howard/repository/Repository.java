@@ -1,9 +1,5 @@
 package dk.howard.repository;
 
-import dk.howard.domain.Id;
-import dk.howard.domain.Name;
-import dk.howard.domain.User;
-import dk.howard.repository.entity.UserTestPO;
 import dk.howard.repository.entitymanager.DemoEntityManager;
 
 import javax.enterprise.context.Dependent;
@@ -11,7 +7,7 @@ import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
-@Dependent
+/*@Dependent
 public class Repository {
     private final EntityManager entityManager;
 
@@ -44,4 +40,4 @@ public class Repository {
             return null;
         }
     }
-}
+}*/

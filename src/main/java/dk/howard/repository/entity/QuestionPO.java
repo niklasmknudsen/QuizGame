@@ -1,16 +1,14 @@
 package dk.howard.repository.entity;
 
+import dk.howard.domain.Category;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "Question")
-@NamedQueries({@NamedQuery(name = "QuestionPO.findAll", query = "Select q from QuestionPO q")})
+@NamedQueries({@NamedQuery(name = "QuestionPO.findAll", query = "Select u from QuestionPO u")})
 public class QuestionPO {
 
     public static final String FIND_ALL = "QuestionPO.findAll";
@@ -19,10 +17,10 @@ public class QuestionPO {
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     @Column(name = "ID", columnDefinition = "VARCHAR(40)", nullable = false, updatable = false, unique = true)
-    private Id id;
+    private UUID id;
 
     @Column(name = "Category", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
-    private String category;
+    private Category category;
 
     @Column(name = "Field", columnDefinition = "VARCHAR(250)", nullable = false, updatable = true)
     private String field;
@@ -36,22 +34,32 @@ public class QuestionPO {
     @OneToOne(mappedBy = "questionPO")
     private AnsweredQuestionPO answeredQuestionPO;
 
-    @OneToMany(mappedBy = "Question", fetch = FetchType.EAGER)
-    private List<AnswerPO> answers = new ArrayList<AnswerPO>();
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<AnswerPO> answers;
 
     public QuestionPO(){
         this.answeredQuestionPO = null;
     }
 
-    public QuestionPO(String category, String field, String description,int points){
+    public QuestionPO(Category category, String field, String description,int points){
         this.category = category;
         this.field = field;
         this.description = description;
         this.points = points;
+        this.answers = new ArrayList<>();
     }
 
+    public QuestionPO(Category category, String field, String description,int points, List<AnswerPO> answers){
+        this.category = category;
+        this.field = field;
+        this.description = description;
+        this.points = points;
+        this.answers = answers;
+    }
+
+
     public AnswerPO createAnswer(AnswerPO answer){
-        AnswerPO newAnswer = new AnswerPO(answer.getAnswerName(), answer.getQuestion(), answer.isTrueAnswer(), answer.getExplanation(), answer.getUrl());
+        AnswerPO newAnswer = new AnswerPO(answer.getAnswerName(), answer.isTrueAnswer(), answer.getExplanation(), answer.getUrl(), answer.getQuestion());
         this.answers.add(newAnswer);
         return newAnswer;
     }
@@ -86,19 +94,21 @@ public class QuestionPO {
         this.answeredQuestionPO = null;
     }
 
-    public Id getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(Id id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
-    public String getCategory() {
+
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

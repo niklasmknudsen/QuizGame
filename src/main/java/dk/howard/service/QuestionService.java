@@ -1,7 +1,6 @@
 package dk.howard.service;
 
 import dk.howard.repository.QuestionRepository;
-import dk.howard.repository.Repository;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.resource.dto.CreateQuestionDTO;
 
@@ -29,11 +28,11 @@ public class QuestionService {
         repository.insert(questionPO);
     }
 
-    public QuestionPO remove(String id){
-        return repository.remove(id);
+    public void remove(int id){
+        repository.remove(id);
     }
 
-    public QuestionPO getById(String id){
+    public QuestionPO getById(int id){
         return repository.getById(id);
     }
 }

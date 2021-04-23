@@ -6,7 +6,10 @@ import dk.howard.repository.interfaces.IRepository;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
+
+@Transactional(rollbackOn = Exception.class)
 @Dependent
 public class AnswerService {
 
@@ -18,8 +21,8 @@ public class AnswerService {
     }
 
 
-    public AnswerPO remove(String id) {
-        return this.repository.getById(id);
+    public void remove(int id) {
+        this.repository.getById(id);
     }
 
     public List<AnswerPO> getAll() {
@@ -30,7 +33,9 @@ public class AnswerService {
         this.repository.insert(entity);
     }
 
-    public AnswerPO getById(String id) {
+    public AnswerPO getById(int id) {
         return this.repository.getById(id);
     }
+
+    public List<AnswerPO> getByQId(int id) { return this.repository.getByQId(id);}
 }

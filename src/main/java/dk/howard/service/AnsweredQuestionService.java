@@ -5,8 +5,10 @@ import dk.howard.repository.entity.AnsweredQuestionPO;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import java.util.List;
 
+@Transactional(rollbackOn = Exception.class)
 @Dependent
 public class AnsweredQuestionService {
 
@@ -18,8 +20,8 @@ public class AnsweredQuestionService {
     }
 
 
-    public AnsweredQuestionPO remove(String id) {
-        return this.repository.remove(id);
+    public void remove(int id) {
+        this.repository.remove(id);
     }
 
     public List<AnsweredQuestionPO> getAll() {
@@ -30,7 +32,7 @@ public class AnsweredQuestionService {
         this.repository.insert(entity);
     }
 
-    public AnsweredQuestionPO getById(String id) {
+    public AnsweredQuestionPO getById(int id) {
         return this.repository.getById(id);
     }
 }

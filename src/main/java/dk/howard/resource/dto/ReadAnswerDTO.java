@@ -1,6 +1,7 @@
 package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import dk.howard.repository.entity.QuestionPO;
 
@@ -8,10 +9,11 @@ import javax.persistence.*;
 
 public class ReadAnswerDTO {
 
-    private Id id;
+    private int id;
 
     private final String answerName;
 
+    @JsonManagedReference
     private final QuestionPO question;
 
     private final boolean trueAnswer;
@@ -22,12 +24,12 @@ public class ReadAnswerDTO {
 
     @JsonCreator
     public ReadAnswerDTO(
-                         @JsonProperty("Id") Id id,
+                         @JsonProperty("Id") int id,
                          @JsonProperty("answerName") String answerName,
-                         @JsonProperty("question") QuestionPO question,
                          @JsonProperty("trueAnswer") boolean trueAnswer,
                          @JsonProperty("explanation") String explanation,
-                         @JsonProperty("url") String url){
+                         @JsonProperty("url") String url,
+                         @JsonProperty("question") QuestionPO question){
         this.answerName = answerName;
         this.question = question;
         this.trueAnswer = trueAnswer;
@@ -35,11 +37,11 @@ public class ReadAnswerDTO {
         this.url = url;
     }
 
-    public void setId(Id id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public Id getId() {
+    public int getId() {
         return id;
     }
 

@@ -22,10 +22,9 @@ public class AnsweredQuestionRepository implements IRepository<AnsweredQuestionP
     }
 
     @Override
-    public AnsweredQuestionPO remove(String id) {
+    public void remove(int id) {
         AnsweredQuestionPO answeredQuestionToRemove = this.entityManager.find(AnsweredQuestionPO.class, id);
         this.entityManager.remove(answeredQuestionToRemove);
-        return answeredQuestionToRemove;
     }
 
     @Override
@@ -40,7 +39,7 @@ public class AnsweredQuestionRepository implements IRepository<AnsweredQuestionP
     }
 
     @Override
-    public AnsweredQuestionPO getById(String id) {
+    public AnsweredQuestionPO getById(int id) {
         return entityManager.find(AnsweredQuestionPO.class, id);
     }
 }

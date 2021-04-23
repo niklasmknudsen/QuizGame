@@ -19,7 +19,7 @@ public class AnsweredQuestionPO {
     private Id id;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "Question", referencedColumnName = "ID")
+    @JoinColumn(name = "Question", referencedColumnName = "id")
     private QuestionPO questionPO;
 
     @OneToOne(fetch = FetchType.LAZY)
