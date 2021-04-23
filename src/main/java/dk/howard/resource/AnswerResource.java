@@ -1,5 +1,6 @@
 package dk.howard.resource;
 
+import dk.howard.domain.Id;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.resource.dto.CreateAnswerDTO;
@@ -31,8 +32,12 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("")
     @GET
-    public List<AnswerPO> getAll(){
-        return service.getAll();
+    public List<ReadAnswerDTO> getAll(){
+        try {
+            return mapper.mapReadAnswers(service.getAll());
+        } catch (NoResultException e) {
+            throw new NoResultException(e.getMessage());
+        }
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
@@ -50,7 +55,7 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @DELETE
-    public void removeAnswer(@PathParam("id") int id){
+    public void removeAnswer(@PathParam("id") Id id){
         try {
             service.remove(id);
         } catch (NoResultException e) {
@@ -62,8 +67,8 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @GET
-    public ReadAnswerDTO getById(@PathParam("id") int id){
-        if (id != 0) {
+    public ReadAnswerDTO getById(@PathParam("id") Id id){
+        if (id != null) {
             ReadAnswerDTO selectedAnswer = mapper.mapReadAnswer(service.getById(id));
             return selectedAnswer;
         }
@@ -74,9 +79,9 @@ public class AnswerResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/question/{id}")
     @GET
-    public List<AnswerPO> getByQId(@PathParam("qid") int id) {
-        if (id != 0) {
-            List<AnswerPO> selectedAnswers = mapper.mapAnswer(service.getByQId(id));
+    public List<ReadAnswerDTO> getByQId(@PathParam("qid") Id id) {
+        if (id != null) {
+            List<ReadAnswerDTO> selectedAnswers = mapper.mapReadAnswers(service.getByQId(id));
             return selectedAnswers;
         }
         return null;

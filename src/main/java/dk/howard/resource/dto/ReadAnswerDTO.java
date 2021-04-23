@@ -3,18 +3,15 @@ package dk.howard.resource.dto;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dk.howard.repository.entity.QuestionPO;
+import dk.howard.domain.*;
 
-import javax.persistence.*;
+import java.util.UUID;
 
 public class ReadAnswerDTO {
 
-    private int id;
+    private final String id;
 
     private final String answerName;
-
-    @JsonManagedReference
-    private final QuestionPO question;
 
     private final boolean trueAnswer;
 
@@ -22,14 +19,17 @@ public class ReadAnswerDTO {
 
     private final String url;
 
-    @JsonCreator
+    @JsonManagedReference
+    private final Question question;
+
     public ReadAnswerDTO(
-                         @JsonProperty("Id") int id,
-                         @JsonProperty("answerName") String answerName,
-                         @JsonProperty("trueAnswer") boolean trueAnswer,
-                         @JsonProperty("explanation") String explanation,
-                         @JsonProperty("url") String url,
-                         @JsonProperty("question") QuestionPO question){
+            String id,
+            String answerName,
+            boolean trueAnswer,
+            String explanation,
+            String url,
+            Question question){
+        this.id = id;
         this.answerName = answerName;
         this.question = question;
         this.trueAnswer = trueAnswer;
@@ -37,20 +37,12 @@ public class ReadAnswerDTO {
         this.url = url;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
     public String getAnswerName() {
         return answerName;
-    }
-
-    public QuestionPO getQuestion() {
-        return question;
     }
 
     public boolean isTrueAnswer() {
@@ -65,15 +57,19 @@ public class ReadAnswerDTO {
         return url;
     }
 
+    public Question getQuestion() {
+        return question;
+    }
+
     @Override
     public String toString() {
         return "ReadAnswerDTO{" +
-                "id=" + id +
+                "id='" + id + '\'' +
                 ", answerName='" + answerName + '\'' +
-                ", question=" + question +
                 ", trueAnswer=" + trueAnswer +
                 ", explanation='" + explanation + '\'' +
                 ", url='" + url + '\'' +
+                ", question=" + question +
                 '}';
     }
 }

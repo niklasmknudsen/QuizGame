@@ -1,6 +1,6 @@
 package dk.howard.resource;
 
-import dk.howard.repository.entity.QuestionPO;
+import dk.howard.domain.Id;
 import dk.howard.resource.dto.CreateQuestionDTO;
 import dk.howard.resource.dto.ReadQuestionDTO;
 import dk.howard.service.QuestionService;
@@ -27,8 +27,12 @@ public class QuestionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("")
     @GET
-    public List<QuestionPO> getAll(){
-        return questionService.getAllQuestions();
+    public List<ReadQuestionDTO> getAll() {
+       try {
+           return mapper.mapReadQuestions(questionService.getAllQuestions());
+       } catch (NoResultException e) {
+           throw new NoResultException(e.getMessage());
+       }
     }
 
     @Consumes(MediaType.APPLICATION_JSON)
@@ -42,7 +46,7 @@ public class QuestionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @DELETE
-    public void removeQuestion(@PathParam("id") int id){
+    public void removeQuestion(@PathParam("id") Id id){
         try {
             questionService.remove(id);
         } catch (NoResultException e) {
@@ -54,7 +58,7 @@ public class QuestionResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("/{id}")
     @GET
-    public ReadQuestionDTO getById(@PathParam("id") int id){
+    public ReadQuestionDTO getById(@PathParam("id") Id id){
         ReadQuestionDTO selectedQuestion = mapper.mapReadQuestion(questionService.getById(id));
         return selectedQuestion;
     }

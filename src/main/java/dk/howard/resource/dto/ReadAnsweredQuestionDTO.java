@@ -2,33 +2,34 @@ package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dk.howard.repository.entity.AnswerPO;
-import dk.howard.repository.entity.QuestionPO;
+import dk.howard.domain.Answer;
+import dk.howard.domain.Id;
+import dk.howard.domain.Question;
 
 public class ReadAnsweredQuestionDTO {
 
-    private int id;
+    private final Id id;
 
-    private final QuestionPO questionPO;
+    private final Question question;
 
-    private final AnswerPO answerPO;
+    private final Answer answer;
 
-    @JsonCreator
-    public ReadAnsweredQuestionDTO(@JsonProperty("question") QuestionPO question, @JsonProperty("answer") AnswerPO answer) {
-        this.questionPO = question;
-        this.answerPO = answer;
+    public ReadAnsweredQuestionDTO(Id id, Question question, Answer answer) {
+        this.id = id;
+        this.question = question;
+        this.answer = answer;
     }
 
-    public int getId() {
+    public Id getId() {
         return id;
     }
 
-    public QuestionPO getQuestionPO() {
-        return questionPO;
+    public Question getQuestionPO() {
+        return question;
     }
 
-    public AnswerPO getAnswerPO() {
-        return answerPO;
+    public Answer getAnswerPO() {
+        return answer;
     }
 
 
@@ -36,8 +37,8 @@ public class ReadAnsweredQuestionDTO {
     public String toString() {
         return "ReadAnsweredQuestionDTO{" +
                 "id=" + id +
-                ", questionPO=" + questionPO +
-                ", answerPO=" + answerPO +
+                ", questionPO=" + question +
+                ", answerPO=" + answer +
                 '}';
     }
 }

@@ -1,36 +1,28 @@
 package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import dk.howard.repository.entity.AnswerPO;
-import dk.howard.repository.entity.AnsweredQuestionPO;
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import dk.howard.domain.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReadQuestionDTO {
 
-    private int id;
+    private Id id;
 
-    private String category;
+    private Category category;
 
-    private String field;
+    private Field field;
 
-    private String description;
+    private Description description;
 
-    private int points;
-
-    private AnsweredQuestionPO answeredQuestionPO;
+    private Points points;
 
     @JsonBackReference
-    private List<AnswerPO> answers = new ArrayList<AnswerPO>();
+    private List<Answer> answers = new ArrayList<>();
 
-    public ReadQuestionDTO(){
-        this.answeredQuestionPO = null;
-    }
+    public ReadQuestionDTO(){ }
 
-    public ReadQuestionDTO(int id, String category, String field, String description, int points, List<AnswerPO> answers){
+    public ReadQuestionDTO(Id id, Category category, Field field, Description description, Points points, List<Answer> answers) {
         this.id = id;
         this.category = category;
         this.field = field;
@@ -39,55 +31,38 @@ public class ReadQuestionDTO {
         this.answers = answers;
     }
 
-    public List<AnswerPO> getAnswers(){
-        return answers;
-    }
-
-    public void setAnswers (List<AnswerPO> answers){
-        this.answers = answers;
-    }
-
-    public AnsweredQuestionPO getAnsweredQuestion(){
-        return this.answeredQuestionPO;
-    }
-
-    public void setAnsweredQuestionPO(AnsweredQuestionPO answeredQuestionPO){
-        this.answeredQuestionPO = answeredQuestionPO;
-    }
-
-    public int getId() {
+    public Id getId() {
         return id;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public String getField() {
+    public Field getField() {
         return field;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    public int getPoints() {
+    public Points getPoints() {
         return points;
     }
 
-    public AnsweredQuestionPO getAnsweredQuestionPO() {
-        return answeredQuestionPO;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
     @Override
     public String toString() {
         return "ReadQuestionDTO{" +
                 "id=" + id +
-                ", category='" + category + '\'' +
-                ", field='" + field + '\'' +
-                ", description='" + description + '\'' +
+                ", category=" + category +
+                ", field=" + field +
+                ", description=" + description +
                 ", points=" + points +
-                ", answeredQuestionPO=" + answeredQuestionPO +
                 ", answers=" + answers +
                 '}';
     }

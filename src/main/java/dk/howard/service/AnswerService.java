@@ -1,5 +1,7 @@
 package dk.howard.service;
 
+import dk.howard.domain.Answer;
+import dk.howard.domain.Id;
 import dk.howard.repository.AnswerRepository;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.interfaces.IRepository;
@@ -21,21 +23,21 @@ public class AnswerService {
     }
 
 
-    public void remove(int id) {
+    public void remove(Id id) {
         this.repository.getById(id);
     }
 
-    public List<AnswerPO> getAll() {
+    public List<Answer> getAll() {
         return this.repository.getAll();
     }
 
-    public void insert(AnswerPO entity) {
+    public void insert(Answer entity) {
         this.repository.insert(entity);
     }
 
-    public AnswerPO getById(int id) {
+    public Answer getById(Id id) {
         return this.repository.getById(id);
     }
 
-    public List<AnswerPO> getByQId(int id) { return this.repository.getByQId(id);}
+    public List<Answer> getByQId(Id id) { return this.repository.getByQId(id);}
 }

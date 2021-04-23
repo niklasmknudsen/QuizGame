@@ -2,64 +2,66 @@ package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import dk.howard.domain.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class CreateQuestionDTO {
 
-    private String category;
-    private String field;
-    private int points;
-    private String description;
+    private Id id;
+    private Category category;
+    private Field field;
+    private Points points;
+    private Description description;
+    private List<Answer> answers;
 
     @JsonCreator
-    public CreateQuestionDTO(@JsonProperty("category") String category,
-                             @JsonProperty("field") String field,
-                             @JsonProperty("description") String description,
-                             @JsonProperty("points") int points) {
+    public CreateQuestionDTO(@JsonProperty("category") Category category,
+                             @JsonProperty("field") Field field,
+                             @JsonProperty("description") Description description,
+                             @JsonProperty("points") Points points,
+                             @JsonProperty("answers") ArrayList<Answer> answers) {
         this.category = category;
         this.field = field;
         this.points = points;
         this.description = description;
+        this.answers = answers;
     }
 
-    public String getCategory() {
+    public Id getId() {
+        return id;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
-        this.category = category;
-    }
-
-    public String getField() {
+    public Field getField() {
         return field;
     }
 
-    public void setField(String field) {
-        this.field = field;
-    }
-
-    public int getPoints() {
+    public Points getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
-    public String getDescription() {
+    public Description getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override
     public String toString() {
         return "CreateQuestionDTO{" +
-                "category='" + category + '\'' +
-                ", field='" + field + '\'' +
+                "id=" + id +
+                ", category=" + category +
+                ", field=" + field +
                 ", points=" + points +
-                ", description='" + description + '\'' +
+                ", description=" + description +
+                ", answers=" + answers +
                 '}';
     }
 }

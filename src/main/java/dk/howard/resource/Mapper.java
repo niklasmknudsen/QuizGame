@@ -1,11 +1,14 @@
 package dk.howard.resource;
 
+import dk.howard.domain.*;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 import dk.howard.repository.entity.QuestionPO;
 import dk.howard.resource.dto.*;
 
 import javax.enterprise.context.Dependent;
+import java.awt.geom.QuadCurve2D;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
@@ -13,61 +16,115 @@ import java.util.stream.DoubleStream;
 @Dependent
 public class Mapper {
 
-    CreateQuestionDTO mapCreateQuestion(QuestionPO questionPO) {
-        return new CreateQuestionDTO(questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints());
+
+
+    CreateQuestionDTO mapCreateQuestion(Question question) {
+        return new CreateQuestionDTO(
+                question.getCategory(),
+                question.getField(),
+                question.getDescription(),
+                question.getPoints(),
+                new ArrayList<>(question.getAnswers()));
     }
 
-    QuestionPO mapQuestion(CreateQuestionDTO createQuestionDTO) {
-        return new QuestionPO(createQuestionDTO.getCategory(), createQuestionDTO.getField(), createQuestionDTO.getDescription(), createQuestionDTO.getPoints());
+    Question mapQuestion(CreateQuestionDTO createQuestionDTO) {
+        return new Question(
+                createQuestionDTO.getId(),
+                createQuestionDTO.getCategory(),
+                createQuestionDTO.getField(),
+                createQuestionDTO.getDescription(),
+                createQuestionDTO.getPoints(),
+                createQuestionDTO.getAnswers()
+        );
     }
 
-    ReadQuestionDTO mapReadQuestion(QuestionPO questionPO) {
-        return new ReadQuestionDTO(questionPO.getId(), questionPO.getCategory(), questionPO.getField(), questionPO.getDescription(), questionPO.getPoints(), questionPO.getAnswers());
+    ReadQuestionDTO mapReadQuestion(Question question) {
+        return new ReadQuestionDTO(
+                question.getId(),
+                question.getCategory(),
+                question.getField(),
+                question.getDescription(),
+                question.getPoints(),
+                question.getAnswers());
     }
 
-    AnswerPO mapCreateAnswer(CreateAnswerDTO createAnswerDTO) {
-        return new AnswerPO(createAnswerDTO.getAnswerName(), createAnswerDTO.isTrueAnswer(), createAnswerDTO.getExplanation(), createAnswerDTO.getUrl(), createAnswerDTO.getQuestion());
+    Answer mapCreateAnswer(CreateAnswerDTO createAnswerDTO) {
+        return new Answer(
+                createAnswerDTO.getId(),
+                new AnswerName(createAnswerDTO.getAnswerName()),
+                new Explanation(createAnswerDTO.getExplanation()),
+                new TrueAnswer(createAnswerDTO.isTrueAnswer()),
+                new Url(createAnswerDTO.getUrl()),
+                new Question(
+                        createAnswerDTO.getQuestion().getId(),
+                        createAnswerDTO.getQuestion().getCategory(),
+                        createAnswerDTO.getQuestion().getField(),
+                        createAnswerDTO.getQuestion().getDescription(),
+                        createAnswerDTO.getQuestion().getPoints()
+                )
+        );
+    }
+    AnsweredQuestion mapCreateAnsweredQuestion(CreateAnsweredQuestionDTO createAnsweredQuestionDTO) {
+        Question newQuestion = createAnsweredQuestionDTO.getQuestion();
+        Answer newAnswer = createAnsweredQuestionDTO.getAnswer();
+        return new AnsweredQuestion(
+                createAnsweredQuestionDTO.getId(),
+                new Question(
+                        newQuestion.getId(),
+                        newQuestion.getCategory(),
+                        newQuestion.getField(),
+                        newQuestion.getDescription(),
+                        newQuestion.getPoints()
+                ),
+                new Answer(
+                        newAnswer.getId(),
+                        newAnswer.getAnswerName(),
+                        newAnswer.getExplanation(),
+                        newAnswer.getTrueAnswer(),
+                        newAnswer.getUrl(),
+                        new Question(
+                                newAnswer.getQuestion().getId(),
+                                newAnswer.getQuestion().getCategory(),
+                                newAnswer.getQuestion().getField(),
+                                newAnswer.getQuestion().getDescription(),
+                                newAnswer.getQuestion().getPoints()
+                        ))
+        );
     }
 
-    ReadAnswerDTO mapReadAnswer(AnswerPO answerPO) {
-        return new ReadAnswerDTO(answerPO.getId(), answerPO.getAnswerName(), answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl(), answerPO.getQuestion());
+    ReadAnsweredQuestionDTO mapReadAnsweredQuestion(AnsweredQuestion answeredQuestion) {
+        return new ReadAnsweredQuestionDTO(answeredQuestion.getId(), answeredQuestion.getQuestion(), answeredQuestion.getAnswer());
     }
 
-    AnsweredQuestionPO mapCreateAnsweredQuestion(CreateAnsweredQuestionDTO createAnsweredQuestionDTO) {
-        return new AnsweredQuestionPO(createAnsweredQuestionDTO.getQuestionPO(), createAnsweredQuestionDTO.getAnswerPO());
+    ReadAnswerDTO mapReadAnswer(Answer answer) {
+        return new ReadAnswerDTO(
+                answer.getId().getId().toString(),
+                answer.getAnswerName().getAnswerName(),
+                answer.getTrueAnswer().getTrueAnswer(),
+                answer.getExplanation().getExplanation(),
+                answer.getUrl().getUrl(),
+                new Question(
+                        answer.getQuestion().getId(),
+                        answer.getQuestion().getCategory(),
+                        answer.getQuestion().getField(),
+                        answer.getQuestion().getDescription(),
+                        answer.getQuestion().getPoints()
+                )
+        );
     }
-
-    ReadAnsweredQuestionDTO mapReadAnsweredQuestion(AnsweredQuestionPO answeredQuestionPO) {
-        return new ReadAnsweredQuestionDTO(answeredQuestionPO.getQuestionPO(), answeredQuestionPO.getAnswerPO());
+    // Question
+    List <ReadQuestionDTO> mapReadQuestions(List<Question> questions) {
+        return questions.stream().map(q->mapReadQuestion(q)).collect(Collectors.toList());
     }
 
     // Answer
-    List <AnswerPO> mapAnswer(List<AnswerPO> answers) {
-        return answers.stream().map(u->mapAnswer(u)).collect(Collectors.toList());
+    List <ReadAnswerDTO> mapReadAnswers(List<Answer> answers) {
+        return answers.stream().map(u->mapReadAnswer(u)).collect(Collectors.toList());
     }
 
-    AnswerPO mapAnswer(AnswerPO answerPO) {
-        return new AnswerPO(answerPO.getAnswerName(),
-                answerPO.isTrueAnswer(), answerPO.getExplanation(), answerPO.getUrl(), answerPO.getQuestion());
-    }
-    // Question
-    List <QuestionPO> mapQuestion(List<QuestionPO> questionPO) {
-        return questionPO.stream().map(u->mapQuestion(u)).collect(Collectors.toList());
-    }
-
-    QuestionPO mapQuestion(QuestionPO questionPO) {
-        return new QuestionPO(questionPO.getCategory(), questionPO.getField(),
-                questionPO.getDescription(), questionPO.getPoints());
-    }
     // Answered Question
-    List <AnsweredQuestionPO> mapAnsweredQuestion(List<AnsweredQuestionPO> answeredQuestionPO) {
-        return answeredQuestionPO.stream().map(u->mapAnsweredQuestion(u)).collect(Collectors.toList());
+    List <ReadAnsweredQuestionDTO> mapReadAnsweredQuestions(List<AnsweredQuestion> answeredQuestions) {
+        return answeredQuestions.stream().map(u->mapReadAnsweredQuestion(u)).collect(Collectors.toList());
     }
-
-    AnsweredQuestionPO mapAnsweredQuestion(AnsweredQuestionPO answeredQuestionPO) {
-        return new AnsweredQuestionPO(answeredQuestionPO.getQuestionPO(),
-                answeredQuestionPO.getAnswerPO());
-    }
-
 
 }

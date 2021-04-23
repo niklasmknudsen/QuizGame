@@ -2,14 +2,17 @@ package dk.howard.resource.dto;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import dk.howard.repository.entity.QuestionPO;
+import dk.howard.domain.Id;
+import dk.howard.domain.Question;
 
 
 public class CreateAnswerDTO {
 
+    private Id id;
+
     private final String answerName;
 
-    private final  QuestionPO question;
+    private final Question question;
 
     private final boolean trueAnswer;
 
@@ -19,7 +22,7 @@ public class CreateAnswerDTO {
 
     @JsonCreator
     public CreateAnswerDTO(@JsonProperty("answerName")  String answerName,
-                           @JsonProperty("question") QuestionPO question,
+                           @JsonProperty("question") Question question,
                            @JsonProperty("trueAnswer") boolean trueAnswer,
                            @JsonProperty("explanation")  String explanation,
                            @JsonProperty("url")  String url){
@@ -30,12 +33,15 @@ public class CreateAnswerDTO {
         this.url = url;
     }
 
+    public Id getId() {
+        return id;
+    }
 
     public String getAnswerName() {
         return answerName;
     }
 
-    public QuestionPO getQuestion() {
+    public Question getQuestion() {
         return question;
     }
 

@@ -1,5 +1,7 @@
 package dk.howard.repository;
 
+import dk.howard.domain.AnsweredQuestion;
+import dk.howard.domain.Id;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.entity.AnsweredQuestionPO;
 import dk.howard.repository.entitymanager.DemoEntityManager;
@@ -9,37 +11,42 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.List;
+import java.util.UUID;
 
 @Dependent
-public class AnsweredQuestionRepository implements IRepository<AnsweredQuestionPO> {
+public class AnsweredQuestionRepository implements IRepository<AnsweredQuestion> {
 
     private final EntityManager entityManager;
-
+    private final Mapper mappper;
 
     @Inject
-    public AnsweredQuestionRepository(DemoEntityManager entityManager) {
+    public AnsweredQuestionRepository(DemoEntityManager entityManager, Mapper mapper) {
         this.entityManager = entityManager.getEntityManager();
+        this.mappper = mapper;
     }
 
     @Override
-    public void remove(int id) {
-        AnsweredQuestionPO answeredQuestionToRemove = this.entityManager.find(AnsweredQuestionPO.class, id);
+    public void remove(Id id) {
+        AnsweredQuestionPO answeredQuestionToRemove = entityManager.find(AnsweredQuestionPO.class, id);
         this.entityManager.remove(answeredQuestionToRemove);
     }
 
     @Override
-    public List<AnsweredQuestionPO> getAll() {
-        return entityManager.createNamedQuery(AnsweredQuestionPO.FIND_ALL, AnsweredQuestionPO.class).getResultList();
+    public List<AnsweredQuestion> getAll() {
+        return mappper.mapAnsweredQuestions(
+                entityManager.createNamedQuery(AnsweredQuestionPO.FIND_ALL, AnsweredQuestionPO.class)
+                        .getResultList());
     }
 
     @Override
-    public void insert(AnsweredQuestionPO entity) {
-        AnsweredQuestionPO newAnsweredQuestion = new AnsweredQuestionPO(entity.getQuestionPO(), entity.getAnswerPO());
+    public void insert(AnsweredQuestion entity) {
+        AnsweredQuestionPO newAnsweredQuestion = mappper.mapAnsweredQuestionPO(entity);
         this.entityManager.persist(newAnsweredQuestion);
     }
 
     @Override
-    public AnsweredQuestionPO getById(int id) {
-        return entityManager.find(AnsweredQuestionPO.class, id);
+    public AnsweredQuestion getById(Id id) {
+        AnsweredQuestion answeredQuestion = mappper.mapAnsweredQuestion(entityManager.find(AnsweredQuestionPO.class, id));
+        return answeredQuestion;
     }
 }

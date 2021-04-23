@@ -23,7 +23,7 @@ public class ListAnswer {
                     new TrueAnswer(answer.isTrueAnswer()),
                     new Url(answer.getUrl()),
                     new Question(
-                            new Id(answer.getQuestion().getId()),
+                            new Id(answer.getId().toString()),
                             answer.getQuestion().getCategory(),
                             new Field(answer.getQuestion().getField()),
                             new Description(answer.getQuestion().getDescription()),

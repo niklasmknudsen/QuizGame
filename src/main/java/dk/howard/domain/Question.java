@@ -12,7 +12,7 @@ public class Question {
     private final Points points;
     private final List<Answer> answers;
 
-    public Question(Id id, Category category, Field field, Description description, Points points) {
+    public Question(Id id,Category category, Field field, Description description, Points points) {
         this.id = id;
         this.category = category;
         this.field = field;
