@@ -5,6 +5,7 @@ import dk.howard.domain.Id;
 import dk.howard.repository.AnswerRepository;
 import dk.howard.repository.entity.AnswerPO;
 import dk.howard.repository.interfaces.IRepository;
+import dk.howard.service.request.AnsweredRequest;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
@@ -40,4 +41,6 @@ public class AnswerService {
     }
 
     public List<Answer> getByQId(Id id) { return this.repository.getByQId(id);}
+
+
 }

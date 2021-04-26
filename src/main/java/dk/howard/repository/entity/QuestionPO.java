@@ -35,12 +35,8 @@ public class QuestionPO {
     @OneToOne(mappedBy = "questionPO")
     private AnsweredQuestionPO answeredQuestionPO;
 
-    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private List<AnswerPO> answers;
-
-    public QuestionPO(){
-        this.answeredQuestionPO = null;
-    }
 
     public QuestionPO(Category category, String field, String description,int points){
         this.category = category;
@@ -50,49 +46,19 @@ public class QuestionPO {
         this.answers = new ArrayList<>();
     }
 
-    public QuestionPO(Category category, String field, String description,int points, List<AnswerPO> answers){
-        this.category = category;
-        this.field = field;
-        this.description = description;
-        this.points = points;
-        this.answers = answers;
-    }
-
-
-    public AnswerPO createAnswer(AnswerPO answer){
-        AnswerPO newAnswer = new AnswerPO(answer.getAnswerName(), answer.isTrueAnswer(), answer.getExplanation(), answer.getUrl(), answer.getQuestion());
-        this.answers.add(newAnswer);
-        return newAnswer;
+    public QuestionPO() {
     }
 
     public void addAnswer(AnswerPO answer){
-        if(!this.answers.contains(answer)){
-            this.answers.add(answer);
-        }
-    }
-
-    public void removeAnswer(AnswerPO answer){
-        if(this.answers.contains(answer)){
-            this.answers.remove(answer);
-        }
+        answer.setQuestion(this);
+        getAnswers().add(answer);
     }
 
     public List<AnswerPO> getAnswers(){
-        return new ArrayList<AnswerPO>(answers);
-    }
-
-    public AnsweredQuestionPO createAnsweredQuestion(AnsweredQuestionPO answeredQuestionPO){
-        AnsweredQuestionPO newAQPO = new AnsweredQuestionPO();
-        this.answeredQuestionPO = newAQPO;
-        return newAQPO;
-    }
-
-    public AnsweredQuestionPO getAnsweredQuestion(){
-        return this.answeredQuestionPO;
-    }
-
-    public void removeAnsweredQuestion(){
-        this.answeredQuestionPO = null;
+        if (answers == null) {
+            answers = new ArrayList<>();
+        }
+        return answers;
     }
 
     public UUID getId() {
@@ -103,38 +69,20 @@ public class QuestionPO {
         this.id = id;
     }
 
-
-
     public Category getCategory() {
         return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
     }
 
     public String getField() {
         return field;
     }
 
-    public void setField(String field) {
-        this.field = field;
-    }
-
     public int getPoints() {
         return points;
     }
 
-    public void setPoints(int points) {
-        this.points = points;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     @Override

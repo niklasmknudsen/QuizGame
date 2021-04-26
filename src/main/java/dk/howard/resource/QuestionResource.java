@@ -1,9 +1,12 @@
 package dk.howard.resource;
 
 import dk.howard.domain.Id;
+import dk.howard.resource.dto.CreateAnsweredQuestionDTO;
 import dk.howard.resource.dto.CreateQuestionDTO;
+import dk.howard.resource.dto.ReadAnswerDTO;
 import dk.howard.resource.dto.ReadQuestionDTO;
 import dk.howard.service.QuestionService;
+import dk.howard.service.request.AnsweredRequest;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -33,6 +36,17 @@ public class QuestionResource {
        } catch (NoResultException e) {
            throw new NoResultException(e.getMessage());
        }
+    }
+
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("/{id}/answer")
+    @POST
+    public ReadAnswerDTO answerQuestion(@PathParam("id") String questionId,CreateAnsweredQuestionDTO createAnsweredQuestionDTO){
+        return mapper.mapReadAnswer(questionService.receiveAnswer(
+                mapper.mapCreateAnsweredQuestion(
+                        questionId,
+                        createAnsweredQuestionDTO)));
     }
 
     @Consumes(MediaType.APPLICATION_JSON)

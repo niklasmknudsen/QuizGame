@@ -9,19 +9,18 @@ import java.util.List;
 
 public class CreateQuestionDTO {
 
-    private Id id;
-    private Category category;
-    private Field field;
-    private Points points;
-    private Description description;
-    private List<Answer> answers;
+    private String category;
+    private String field;
+    private int points;
+    private String description;
+    private List<CreateAnswerDTO> answers;
 
     @JsonCreator
-    public CreateQuestionDTO(@JsonProperty("category") Category category,
-                             @JsonProperty("field") Field field,
-                             @JsonProperty("description") Description description,
-                             @JsonProperty("points") Points points,
-                             @JsonProperty("answers") ArrayList<Answer> answers) {
+    public CreateQuestionDTO(@JsonProperty("category") String category,
+                             @JsonProperty("field") String field,
+                             @JsonProperty("description") String description,
+                             @JsonProperty("points") int points,
+                             @JsonProperty("answers") ArrayList<CreateAnswerDTO> answers) {
         this.category = category;
         this.field = field;
         this.points = points;
@@ -29,34 +28,29 @@ public class CreateQuestionDTO {
         this.answers = answers;
     }
 
-    public Id getId() {
-        return id;
-    }
-
-    public List<Answer> getAnswers() {
+    public List<CreateAnswerDTO> getAnswers() {
         return answers;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public Field getField() {
+    public String getField() {
         return field;
     }
 
-    public Points getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public Description getDescription() {
+    public String getDescription() {
         return description;
     }
 
     @Override
     public String toString() {
         return "CreateQuestionDTO{" +
-                "id=" + id +
                 ", category=" + category +
                 ", field=" + field +
                 ", points=" + points +

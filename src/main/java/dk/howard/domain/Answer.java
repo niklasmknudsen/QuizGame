@@ -1,8 +1,6 @@
 package dk.howard.domain;
 
-import java.io.Serializable;
-
-public class Answer implements Serializable {
+public class Answer{
 
 
     private final Id id;
@@ -11,20 +9,24 @@ public class Answer implements Serializable {
 
     private final Explanation explanation;
 
-    private final TrueAnswer trueAnswer;
+    private final boolean trueAnswer;
 
     private final Url url;
 
-    private final Question question;
 
-
-    public Answer(Id id, AnswerName answerName, Explanation explanation, TrueAnswer trueAnswer, Url url, Question question) {
+    public Answer(Id id, AnswerName answerName, Explanation explanation, boolean trueAnswer, Url url) {
         this.id = id;
         this.answerName = answerName;
         this.explanation = explanation;
         this.trueAnswer = trueAnswer;
         this.url = url;
-        this.question = question;
+    }
+    public Answer(AnswerName answerName, Explanation explanation, boolean trueAnswer, Url url) {
+        this.id = null;
+        this.answerName = answerName;
+        this.explanation = explanation;
+        this.trueAnswer = trueAnswer;
+        this.url = url;
     }
 
     public Id getId() {
@@ -39,16 +41,12 @@ public class Answer implements Serializable {
         return explanation;
     }
 
-    public TrueAnswer getTrueAnswer() {
+    public boolean getTrueAnswer() {
         return trueAnswer;
     }
 
     public Url getUrl() {
         return url;
-    }
-
-    public Question getQuestion() {
-        return question;
     }
 
     @Override
@@ -59,7 +57,6 @@ public class Answer implements Serializable {
                 ", explanation=" + explanation +
                 ", trueAnswer=" + trueAnswer +
                 ", url=" + url +
-                ", question=" + question +
                 '}';
     }
 }

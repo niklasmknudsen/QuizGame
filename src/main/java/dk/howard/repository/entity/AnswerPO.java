@@ -52,12 +52,10 @@ public class AnswerPO {
     private QuestionPO question;
 
     public AnswerPO(){
-        this.question = null;
     }
 
-    public AnswerPO(String answerName, boolean trueAnswer, String explanation, String url, QuestionPO question){
+    public AnswerPO(String answerName, boolean trueAnswer, String explanation, String url){
         this.answerName = answerName;
-        this.question = question;
         this.trueAnswer = trueAnswer;
         this.explanation = explanation;
         this.url = url;

@@ -1,16 +1,15 @@
 package dk.howard.service;
 
+import dk.howard.domain.Answer;
 import dk.howard.domain.Id;
 import dk.howard.domain.Question;
 import dk.howard.repository.QuestionRepository;
-import dk.howard.repository.entity.QuestionPO;
-import dk.howard.resource.dto.CreateQuestionDTO;
+import dk.howard.service.request.AnsweredRequest;
 
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.UUID;
 
 @Transactional(rollbackOn = Exception.class)
 @Dependent
@@ -37,5 +36,10 @@ public class QuestionService {
 
     public Question getById(Id id){
         return repository.getById(id);
+    }
+
+    public Answer receiveAnswer(AnsweredRequest answeredRequest) {
+        Question question = repository.getById(answeredRequest.getQuestionID());
+        return question.findAnswer(answeredRequest.getAnswerID());
     }
 }

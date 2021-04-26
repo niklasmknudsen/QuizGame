@@ -9,35 +9,21 @@ import dk.howard.domain.Question;
 
 public class CreateAnsweredQuestionDTO {
 
-    private Id id;
-
-    private final Question question;
-
-    private final Answer answer;
+    private final String answer;
 
     @JsonCreator
-    public CreateAnsweredQuestionDTO(@JsonProperty("question") Question question, @JsonProperty("answer") Answer answer) {
-        this.question = question;
+    public CreateAnsweredQuestionDTO(@JsonProperty("answer") String answer) {
         this.answer = answer;
     }
 
-    public Id getId() {
-        return id;
-    }
 
-    public Question getQuestion() {
-        return question;
-    }
-
-    public Answer getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
     @Override
     public String toString() {
         return "CreateAnsweredQuestionDTO{" +
-                "id=" + id +
-                ", questionPO=" + question +
                 ", answerPO=" + answer +
                 '}';
     }

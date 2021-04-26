@@ -1,8 +1,6 @@
 package dk.howard.domain;
 
-import java.io.Serializable;
-
-public class Url implements Serializable {
+public class Url {
 
     private final String url;
 

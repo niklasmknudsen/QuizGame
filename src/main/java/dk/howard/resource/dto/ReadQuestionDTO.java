@@ -7,22 +7,21 @@ import java.util.List;
 
 public class ReadQuestionDTO {
 
-    private Id id;
+    private String id;
 
-    private Category category;
+    private String category;
 
-    private Field field;
+    private String field;
 
-    private Description description;
+    private String description;
 
-    private Points points;
+    private int points;
 
-    @JsonBackReference
-    private List<Answer> answers = new ArrayList<>();
+    private List<AnswerDTO> answers;
 
     public ReadQuestionDTO(){ }
 
-    public ReadQuestionDTO(Id id, Category category, Field field, Description description, Points points, List<Answer> answers) {
+    public ReadQuestionDTO(String id, String category, String field, String description, int points, List<AnswerDTO> answers) {
         this.id = id;
         this.category = category;
         this.field = field;
@@ -31,27 +30,27 @@ public class ReadQuestionDTO {
         this.answers = answers;
     }
 
-    public Id getId() {
+    public String getId() {
         return id;
     }
 
-    public Category getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public Field getField() {
+    public String getField() {
         return field;
     }
 
-    public Description getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public Points getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public List<Answer> getAnswers() {
+    public List<AnswerDTO> getAnswers() {
         return answers;
     }
 

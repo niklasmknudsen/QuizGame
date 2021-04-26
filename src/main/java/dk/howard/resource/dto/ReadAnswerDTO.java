@@ -19,19 +19,14 @@ public class ReadAnswerDTO {
 
     private final String url;
 
-    @JsonManagedReference
-    private final Question question;
-
     public ReadAnswerDTO(
             String id,
             String answerName,
             boolean trueAnswer,
             String explanation,
-            String url,
-            Question question){
+            String url){
         this.id = id;
         this.answerName = answerName;
-        this.question = question;
         this.trueAnswer = trueAnswer;
         this.explanation = explanation;
         this.url = url;
@@ -57,10 +52,6 @@ public class ReadAnswerDTO {
         return url;
     }
 
-    public Question getQuestion() {
-        return question;
-    }
-
     @Override
     public String toString() {
         return "ReadAnswerDTO{" +
@@ -69,7 +60,6 @@ public class ReadAnswerDTO {
                 ", trueAnswer=" + trueAnswer +
                 ", explanation='" + explanation + '\'' +
                 ", url='" + url + '\'' +
-                ", question=" + question +
                 '}';
     }
 }

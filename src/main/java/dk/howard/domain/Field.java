@@ -1,8 +1,6 @@
 package dk.howard.domain;
 
-import java.io.Serializable;
-
-public class Field implements Serializable {
+public class Field {
 
     private final String field;
 

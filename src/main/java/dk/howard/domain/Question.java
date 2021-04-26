@@ -1,10 +1,9 @@
 package dk.howard.domain;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Question implements Serializable {
+public class Question {
 
     private final Id id;
     private final Category category;
@@ -24,6 +23,15 @@ public class Question implements Serializable {
 
     public Question(Id id, Category category, Field field, Description description, Points points, List<Answer> answers) {
         this.id = id;
+        this.category = category;
+        this.field = field;
+        this.description = description;
+        this.points = points;
+        this.answers = answers;
+    }
+
+    public Question(Category category, Field field, Description description, Points points, List<Answer> answers) {
+        this.id = null;
         this.category = category;
         this.field = field;
         this.description = description;
@@ -53,6 +61,12 @@ public class Question implements Serializable {
 
     public List<Answer> getAnswers() {
         return answers;
+    }
+
+    public Answer findAnswer(Id answerId) {
+        return answers.stream()
+                .filter(a-> a.getId().equals(answerId))
+                .findFirst().orElse(null);
     }
 
 

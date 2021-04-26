@@ -37,18 +37,20 @@ public class QuestionRepository implements IRepository<Question> {
     }
 
     @Override
-    public void insert(Question entity) {
+    public void insert(Question question) {
         QuestionPO newQuestion = new QuestionPO(
-                entity.getCategory(),
-                entity.getField().getField(),
-                entity.getDescription().getDescription(),
-                entity.getPoints().getPoints());
-        entityManager.persist(newQuestion); // flushes new object to db.
+                question.getCategory(),
+                question.getField().getField(),
+                question.getDescription().getDescription(),
+                question.getPoints().getPoints());
+        question.getAnswers().forEach(a-> newQuestion.addAnswer(mapper.mapAnswerPO(a)));
+        entityManager.persist(newQuestion);// flushes new object to db.
+        newQuestion.getAnswers().forEach(entityManager::persist);
     }
 
     @Override
     public Question getById(Id id) {
-        Question foundQuestion = mapper.mapQuestion(entityManager.find(QuestionPO.class, id));
+        Question foundQuestion = mapper.mapQuestion(entityManager.find(QuestionPO.class, id.getId()));
         return foundQuestion;
     }
 }
