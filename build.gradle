@@ -5,7 +5,7 @@ plugins {
 }
 
 
-group 'dk.howard'
+group 'dk.QuizGame'
 version '1.0-SNAPSHOT'
 description = """Quiz-Game"""
 
@@ -29,7 +29,7 @@ task copyResources(type: Copy) {
 
 ext {
     helidonversion = '2.0.1'
-    javaMainClass = 'dk.howard.Main'
+    javaMainClass = 'dk.QuizGame.Main'
 }
 
 application {

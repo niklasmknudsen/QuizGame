@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: dk.howard.Main
+Main-Class: dk.QuizGame.Main
 Class-Path: libs/helidon-integrations-cdi-hibernate-2.0.1.jar libs/jakar
  ta.persistence-api-2.2.3.jar libs/helidon-microprofile-2.0.1.jar libs/j
  avax.transaction-api-1.2.jar libs/helidon-integrations-cdi-datasource-h

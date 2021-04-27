@@ -71,7 +71,7 @@ set CLASSPATH=%APP_HOME%\lib\quiz-game-1.0-SNAPSHOT.jar;%APP_HOME%\lib\helidon-i
 
 
 @rem Execute quiz-game
-"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %QUIZ_GAME_OPTS%  -classpath "%CLASSPATH%" dk.howard.Main %*
+"%JAVA_EXE%" %DEFAULT_JVM_OPTS% %JAVA_OPTS% %QUIZ_GAME_OPTS%  -classpath "%CLASSPATH%" dk.QuizGame.Main %*
 
 :end
 @rem End local scope for the variables with windows NT shell
