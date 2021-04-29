@@ -8,25 +8,37 @@ import dk.QuizGame.repository.entity.QuestionPO;
 import dk.QuizGame.repository.entitymanager.DemoEntityManager;
 import io.helidon.integrations.cdi.jpa.PersistenceUnitInfoBean;
 
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.swing.text.html.parser.Entity;
+import javax.transaction.*;
+import javax.transaction.xa.XAResource;
 
-public class BuildObjects {
+public class BuildObjects extends AbstractObjects{
 
-    private static final String PERSISTENCE_UNIT = "demo";
+    private static BuildObjects _instance;
 
-    @PersistenceContext(unitName = PERSISTENCE_UNIT)
-    private EntityManager entityManager;
+    private BuildObjects() {
+
+    }
+
+    public static BuildObjects getInstance() {
+        if(null == _instance) {
+            _instance = new BuildObjects();
+        }
+        return _instance;
+    }
+
+    public void seed(final EntityManager entityManager) {
+
+        new Transaction(entityManager) {{
 
 
-    public BuildObjects() { }
+        }}.commit();
 
-
-    public void seed() {
-
-        QuestionPO q1 = new QuestionPO(Category.SCIENCE, "Physics","Wich physical property can be measured in the unit Coulomb" ,12);
+        QuestionPO q1 = new QuestionPO(Category.SCIENCE, "Physics","Which physical property can be measured in the unit Coulomb" ,12);
         AnswerPO a1 = new AnswerPO("Force", false, "The SI unit for Force is Newton", "https://en.wikipedia.org/wiki/Force");
         AnswerPO a2 = new AnswerPO("Pressure", false,"The SI unit for Pressure is Pascal", "https://en.wikipedia.org/wiki/Pressure");
         AnswerPO a3 = new AnswerPO("Volume", false, "The SI unit for Volume is Cubic Meter",  "https://en.wikipedia.org/wiki/Volume");

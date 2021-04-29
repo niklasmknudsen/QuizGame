@@ -12,11 +12,12 @@ public class Main {
         // Set system properties
         System.setProperty("LOG4J2_DEPLOYMENT_NAME", DEPLOYMENT_NAME);
 
-        BuildObjects bo = new BuildObjects();
-        bo.seed();
+
 
         // start the server
         createServer().start();
+
+        BuildObjects.getInstance().seed();
     }
 
     public static Server createServer() {
