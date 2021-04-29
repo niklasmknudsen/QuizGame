@@ -16,12 +16,12 @@ public class QuestionRepository implements IRepository<Question> {
 
     private final EntityManager entityManager;
     private final Mapper mapper;
-
     @Inject
     public QuestionRepository(DemoEntityManager entityManager, Mapper mapper) {
         this.entityManager = entityManager.getEntityManager();
         this.mapper = mapper;
     }
+
 
     @Override
     public void remove(Id id) {

@@ -16,7 +16,12 @@ import javax.swing.text.html.parser.Entity;
 import javax.transaction.*;
 import javax.transaction.xa.XAResource;
 
-public class BuildObjects extends AbstractObjects{
+public class BuildObjects {
+
+    private static final String PERSISTENCE_UNIT = "demo";
+
+    @PersistenceContext(unitName = PERSISTENCE_UNIT)
+    private EntityManager entityManager;
 
     private static BuildObjects _instance;
 
@@ -31,12 +36,8 @@ public class BuildObjects extends AbstractObjects{
         return _instance;
     }
 
-    public void seed(final EntityManager entityManager) {
-
-        new Transaction(entityManager) {{
-
-
-        }}.commit();
+    @Transactional
+    public void seed() {
 
         QuestionPO q1 = new QuestionPO(Category.SCIENCE, "Physics","Which physical property can be measured in the unit Coulomb" ,12);
         AnswerPO a1 = new AnswerPO("Force", false, "The SI unit for Force is Newton", "https://en.wikipedia.org/wiki/Force");
