@@ -13,14 +13,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.swing.text.html.parser.Entity;
 
-public class buildObjects {
+public class BuildObjects {
 
     private static final String PERSISTENCE_UNIT = "demo";
 
     @PersistenceContext(unitName = PERSISTENCE_UNIT)
     private EntityManager entityManager;
 
-    public buildObjects() { }
+
+    public BuildObjects() { }
+
 
     public void seed() {
 
@@ -46,9 +48,9 @@ public class buildObjects {
 
         AnswerPO a6 = new AnswerPO("Singleton", true, "singleton creates a instance of an object, witch can only be created once", "https://en.wikipedia.org/wiki/Singleton_pattern");
         AnswerPO a7 = new AnswerPO("Adapter", false, "In software engineering, the adapter pattern is a software design pattern (also known as wrapper, an alternative naming shared with the decorator pattern) that allows the interface of an existing class to be used as another interface", "https://en.wikipedia.org/wiki/Adapter_pattern");
-        AnswerPO a8 = new AnswerPO("Observer", false, "The observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.", "https://en.wikipedia.org/wiki/Observer_pattern" )
+        AnswerPO a8 = new AnswerPO("Observer", false, "The observer pattern is a software design pattern in which an object, named the subject, maintains a list of its dependents, called observers, and notifies them automatically of any state changes, usually by calling one of their methods.", "https://en.wikipedia.org/wiki/Observer_pattern" );
         AnswerPO a9 = new AnswerPO("Iterator", false, "In object-oriented programming, the iterator pattern is a design pattern in which an iterator is used to traverse a container and access the container's elements. The iterator pattern decouples algorithms from containers; in some cases, algorithms are necessarily container-specific and thus cannot be decoupled.", "https://en.wikipedia.org/wiki/Iterator_pattern");
-        AnswerPO a10 = new AnswerPO("Composite", false, "In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes a group of objects that are treated the same way as a single instance of the same type of object. The intent of a composite is to compose objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly","https://en.wikipedia.org/wiki/Composite_pattern"));
+        AnswerPO a10 = new AnswerPO("Composite", false, "In software engineering, the composite pattern is a partitioning design pattern. The composite pattern describes a group of objects that are treated the same way as a single instance of the same type of object. The intent of a composite is to compose objects into tree structures to represent part-whole hierarchies. Implementing the composite pattern lets clients treat individual objects and compositions uniformly","https://en.wikipedia.org/wiki/Composite_pattern");
 
         q2.addAnswer(a6);
         q2.addAnswer(a7);

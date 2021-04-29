@@ -1,5 +1,6 @@
 package dk.QuizGame;
 
+import dk.QuizGame.build.BuildObjects;
 import io.helidon.microprofile.server.Server;
 
 public class Main {
@@ -11,6 +12,8 @@ public class Main {
         // Set system properties
         System.setProperty("LOG4J2_DEPLOYMENT_NAME", DEPLOYMENT_NAME);
 
+        BuildObjects bo = new BuildObjects();
+        bo.seed();
 
         // start the server
         createServer().start();
