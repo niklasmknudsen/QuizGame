@@ -31,9 +31,6 @@ public class QuestionPO {
     @Column(name = "Points", columnDefinition = "INT", nullable = false, updatable = true)
     private int points;
 
-    @OneToOne(mappedBy = "questionPO")
-    private AnsweredQuestionPO answeredQuestionPO;
-
     @OneToMany(mappedBy = "question", fetch = FetchType.EAGER)
     private List<AnswerPO> answers;
 
