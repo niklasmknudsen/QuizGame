@@ -1,6 +1,6 @@
 package dk.QuizGame;
 
-import dk.QuizGame.build.BuildObjects;
+import dk.QuizGame.startup.BuildObjects;
 import io.helidon.microprofile.server.Server;
 
 public class Main {
@@ -17,7 +17,6 @@ public class Main {
         // start the server
         createServer().start();
 
-        BuildObjects.getInstance().seed();
     }
 
     public static Server createServer() {
